@@ -111,3 +111,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Pycharm
+.idea/
+studywise.iml
+
