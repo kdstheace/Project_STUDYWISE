@@ -1,22 +1,32 @@
-{% extends "socialaccount/base.html" %}
-
+{% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock %}
 
-{% block content %}
-    <h1>{% trans "Sign Up" %}</h1>
+{% block head_css %}
+{% endblock %}
 
-<p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
-{{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+{% block head_js %}
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70b481f827ce15d5e5524fe1dd38a6fe"></script>
+{% endblock %}
 
-<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+{% block body_1 %}
+    <h1>{% trans "ようこそ。STUDYWISEへ" %}</h1>
 
+    <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+    </form>
+{% endblock %}
+
+{% block body_2 %}
+    <div id="map" style="width:150px;height:150px;"></div>
+    <script src="{% static 'js/common/kakaomapCurrentAxis.js' %}"></script>
 {% endblock %}

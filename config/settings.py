@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,15 @@ INSTALLED_APPS = [
     'search.apps.SearchConfig',
     'common.apps.CommonConfig',
 
+    # allauth의 의존성 앱
+    'django.contrib.sites',
+
+    # allauth 소셜로그인
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 
 ]
 
@@ -61,7 +71,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,5 +133,24 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# Media directory
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Allauth backend
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # 디폴트 모델 백엔드
+    'allauth.account.auth_backends.AuthenticationBackend', #allauth 모델 백앤드
+)
+
+# Login redirect, auto-signup settings, login-form settings
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_AUTO_SIGNUP = False # 오토가입방지
+ACCOUNT_SIGNUP_FORM_CLASS = 'common.forms.SignupForm'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

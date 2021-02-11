@@ -18,10 +18,13 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('home.urls')),
+    path('', include('home.urls')),
     path('activity/', include('activity.urls')),
     path('search/', include('search.urls')),
     path('prof/', include('prof.urls')),
+    
     path('common/', include('common.urls')),
+    # allauth urls mapping
+    path('accounts/', include('allauth.urls')),
 
 ]

@@ -1,9 +1,68 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import User
-
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+
+
+# Create your models here.
+class Profile(models.Model):
+    GENDER_CHOICES = (
+        ('M', '男性'),
+        ('F', '女性')
+    )
+    DISCLOSURE = (
+        ('T', '同意'),
+        ('F', '拒否')
+    )
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    gender = models.CharField(_("性別"), max_length=1, choices=GENDER_CHOICES, null=False)
+    birth_date = models.DateField(_("生年月日"), null=False)
+    school = models.CharField(_("学歴"), max_length=50, null=True, blank=True)
+    address1 = models.CharField(_("住所1"), max_length=100, null=False)
+    address2 = models.CharField(_("住所2"), max_length=100, null=False)
+    register_datetime = models.DateTimeField(_("登録日時"), default=timezone.now)
+    last_login_datetime = models.DateTimeField(_("最後のログインの日時"), null=True, blank=True)
+    photo = models.ImageField(_("プロフィール"), upload_to='profile/')
+    self_disclosure = models.CharField(_("プライバシー"), max_length=1, choices=DISCLOSURE, null=False)
+
+    attend_apply_count = models.IntegerField(_("出席申し込みの数"), default=0)
+    actual_count = models.IntegerField(_("実際に出席した数"), default=0)
+
+    introduction1 = models.CharField(_("自己紹介1"), max_length=4000, null=True, blank=True)
+    introduction2 = models.CharField(_("自己紹介2"), max_length=4000, null=True, blank=True)
+    introduction3 = models.CharField(_("自己紹介3"), max_length=4000, null=True, blank=True)
+    introduction4 = models.CharField(_("自己紹介4"), max_length=4000, null=True, blank=True)
+    introduction5 = models.CharField(_("自己紹介5"), max_length=4000, null=True, blank=True)
+
+    career1 = models.CharField(_("キャリア1"), max_length=100, null=True, blank=True)
+    career2 = models.CharField(_("キャリア2"), max_length=100, null=True, blank=True)
+    career3 = models.CharField(_("キャリア3"), max_length=100, null=True, blank=True)
+    career4 = models.CharField(_("キャリア4"), max_length=100, null=True, blank=True)
+    career5 = models.CharField(_("キャリア5"), max_length=100, null=True, blank=True)
+
+    interest1 = models.CharField(_("気に入り1"), max_length=50, null=False)
+    interest2 = models.CharField(_("気に入り2"), max_length=50, null=True, blank=True)
+    interest3 = models.CharField(_("気に入り3"), max_length=50, null=True, blank=True)
+    interest4 = models.CharField(_("気に入り4"), max_length=50, null=True, blank=True)
+    interest5 = models.CharField(_("気に入り5"), max_length=50, null=True, blank=True)
+
+    latitude = models.DecimalField(_("緯度"), max_digits=10, decimal_places=7, null=False)
+    longitude = models.DecimalField(_("経度"), max_digits=10, decimal_places=7, null=False)
+
+    # 이메일은 기본적으로 되어 있음
+    # 이름 기본적으로 있음
+    # 성 기본적으로 있음
+    # 구글 이메일 기본적으로 있음
+    # 구글 제공 사진 기본적으로 있음
+
+    class Meta:
+        db_table = 'account_profile'
+
 
 '''
 class MemInfo(models.Model):

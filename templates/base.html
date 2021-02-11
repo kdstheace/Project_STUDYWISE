@@ -2,9 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- jQuery Imported -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap Imported -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- templates overrides title -->
+    {% block head_title %}
+    {% endblock %}
+    <!-- templates overrides css -->
+    {% block head_css %}
+    {% endblock %}
+    <!-- templates overrides javascript -->
+    {% block head_js %}
+    {% endblock %}
 </head>
-<body>
 
+<body>
+    {% block body_1 %}
+    {% endblock %}
+
+    {% block body_2 %}
+    {% endblock %}
+
+    {% block body_3 %}
+    {% endblock %}
+
+    {% block body_4 %}
+    {% endblock %}
+
+    {% block body_5 %}
+    {% endblock %}
+
+    {% block body_6 %}
+    {% endblock %}
+
+    {% block body_7 %}
+    {% endblock %}
+
+    {% block body_8 %}
+    {% endblock %}
+
+    {% block body_9 %}
+    {% endblock %}
+
+    {% block body_10 %}
+    {% endblock %}
 </body>
 </html>
