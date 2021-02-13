@@ -6,152 +6,108 @@ from .models import Profile
 
 class SignupForm(forms.Form):
     GENDER_CHOICES = (
-        ('M', '男性'),
-        ('F', '女性')
+        ('M', 'male'),
+        ('F', 'female')
     )
     DISCLOSURE = (
-        ('T', '同意'),
-        ('F', '拒否')
+        ('T', 'agree'),
+        ('F', 'disagree')
     )
 
     BIRTH_YEAR_CHOICES = [year for year in range(1900, 2022)]
     gender = forms.BooleanField(
-        label=_('性別'),
-        widget=forms.RadioSelect(attrs={'placeholder': _('性別')}, choices=GENDER_CHOICES),
+        label=_('gender'),
+        widget=forms.RadioSelect(attrs={'placeholder': _('gender')}, choices=GENDER_CHOICES),
     )
+
     birth_date = forms.DateField(
-        label=_("生年月日"),
+        label=_("birth_date"),
         widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES),
     )
     school = forms.CharField(
-        label=_("学歴"),
+        label=_("education"),
         max_length=50,
-        widget=forms.TextInput(attrs={'placeholder': _('学歴')}),
+        widget=forms.TextInput(attrs={'placeholder': _('birth_date')}),
     )
     first_name = forms.CharField(
-        label=_('名'),
+        label=_('first_name'),
         max_length=30,
-        widget=forms.TextInput(attrs={'placeholder': _('名')})
+        widget=forms.TextInput(attrs={'placeholder': _('first_name')})
     )
     last_name = forms.CharField(
-        label=_('名字'),
+        label=_('last_name'),
         max_length=30,
-        widget=forms.TextInput(attrs={'placeholder': _('名字')})
+        widget=forms.TextInput(attrs={'placeholder': _('last_name')})
     )
 
     address1 = forms.CharField(
-        label=_("住所1"),
+        label=_("address1"),
         max_length=100,
-        widget=forms.TextInput(attrs={'placeholder': _('住所1')})
+        widget=forms.TextInput(attrs={'placeholder': _('address1')})
     )
     address2 = forms.CharField(
-        label=_("住所2"),
+        label=_("address2"),
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('住所2')})
+        widget=forms.TextInput(attrs={'placeholder': _('address2')})
     )
     photo = forms.ImageField(
-        label=_("プロフィール"),
+        label=_("photo"),
     )
     self_disclosure = forms.BooleanField(
-        label=_("プライバシー"),
-        widget=forms.RadioSelect(attrs={'placeholder': _('プライバシー')}, choices=DISCLOSURE),
+        label=_("agreement"),
+        widget=forms.RadioSelect(attrs={'placeholder': _('agreement')}, choices=DISCLOSURE),
     )
-    introduction1 = forms.CharField(
-        label=_("自己紹介1"),
+
+    introduction = forms.CharField(
+        label=_("career_info1"),
         max_length=4000,
         required=False,
-        widget=forms.Textarea(attrs={'placeholder': _('自己紹介1')}),
+        widget=forms.Textarea(attrs={'placeholder': _('introduction')}),
     )
-    introduction2 = forms.CharField(
-        label=_("自己紹介2"),
-        max_length=4000,
-        required=False,
-        widget=forms.Textarea(attrs={'placeholder': _('自己紹介2')}, ),
-    )
-    introduction3 = forms.CharField(
-        label=_("自己紹介3"),
-        max_length=4000,
-        required=False,
-        widget=forms.Textarea(attrs={'placeholder': _('自己紹介3')}, ),
-    )
-    introduction4 = forms.CharField(
-        label=_("自己紹介4"),
-        max_length=4000,
-        required=False,
-        widget=forms.Textarea(attrs={'placeholder': _('自己紹介4')}, ),
-    )
-    introduction5 = forms.CharField(
-        label=_("自己紹介5"),
-        max_length=4000,
-        required=False,
-        widget=forms.Textarea(attrs={'placeholder': _('自己紹介5')}, ),
-    )
+
     career1 = forms.CharField(
-        label=_("キャリア1"),
+        label=_("career1"),
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('キャリア1')}, ),
+        widget=forms.TextInput(attrs={'placeholder': _('career1')}, ),
     )
     career2 = forms.CharField(
-        label=_("キャリア2"),
+        label=_("career2"),
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('キャリア2')}, ),
+        widget=forms.TextInput(attrs={'placeholder': _('career2')}, ),
     )
     career3 = forms.CharField(
-        label=_("キャリア3"),
+        label=_("career3"),
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('キャリア3')}, ),
+        widget=forms.TextInput(attrs={'placeholder': _('career3')}, ),
     )
     career4 = forms.CharField(
-        label=_("キャリア4"),
+        label=_("career4"),
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('キャリア4')}, ),
+        widget=forms.TextInput(attrs={'placeholder': _('career4')}, ),
     )
     career5 = forms.CharField(
-        label=_("キャリア5"),
+        label=_("career5"),
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('キャリア5')}, ),
+        widget=forms.TextInput(attrs={'placeholder': _('career5')}, ),
     )
-    interest1 = forms.CharField(
-        label=_("気に入り1"),
+
+    interest = forms.CharField(
+        label=_("interest"),
         max_length=50,
-        widget=forms.TextInput(attrs={'placeholder': _('気に入り1')}),
-    )
-    interest2 = forms.CharField(
-        label=_("気に入り2"),
-        max_length=50,
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('気に入り2')}, ),
-    )
-    interest3 = forms.CharField(
-        label=_("気に入り2"),
-        max_length=50,
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('気に入り3')}, ),
-    )
-    interest4 = forms.CharField(
-        label=_("気に入り2"),
-        max_length=50,
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('気に入り4')}, ),
-    )
-    interest5 = forms.CharField(
-        label=_("気に入り2"),
-        max_length=50,
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': _('気に入り5')}, ),
+        widget=forms.TextInput(attrs={'placeholder': _('interest')}),
     )
 
     latitude = forms.DecimalField(
-        label=_("緯度"),
+        label=_("latitude"),
     )
     longitude = forms.DecimalField(
-        label=_("経度"),
+        label=_("longitude"),
     )
 
     # 이메일은 기본적으로 되어 있음
@@ -174,11 +130,7 @@ class SignupForm(forms.Form):
         profile.photo = self.cleaned_data['photo']
 
         profile.self_disclosure = self.cleaned_data['self_disclosure']
-        profile.introduction1 = self.cleaned_data['introduction1']
-        profile.introduction2 = self.cleaned_data['introduction2']
-        profile.introduction3 = self.cleaned_data['introduction3']
-        profile.introduction4 = self.cleaned_data['introduction4']
-        profile.introduction5 = self.cleaned_data['introduction5']
+        profile.introduction1 = self.cleaned_data['introduction']
 
         profile.career1 = self.cleaned_data['career1']
         profile.career2 = self.cleaned_data['career2']
@@ -186,11 +138,7 @@ class SignupForm(forms.Form):
         profile.career4 = self.cleaned_data['career4']
         profile.career5 = self.cleaned_data['career5']
 
-        profile.interest1 = self.cleaned_data['interest1']
-        profile.interest2 = self.cleaned_data['interest2']
-        profile.interest3 = self.cleaned_data['interest3']
-        profile.interest4 = self.cleaned_data['interest4']
-        profile.interest5 = self.cleaned_data['interest5']
+        profile.interest1 = self.cleaned_data['interest']
 
         profile.latitude = self.cleaned_data['latitude']
         profile.longitude = self.cleaned_data['longitude']

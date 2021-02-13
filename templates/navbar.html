@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+
+{% block head_title %}
+    <meta charset="UTF-8">
+{% endblock %}
+
+{% block head_css %}
+    <link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+{% endblock %}
+{% block head_js %}
+    <script>
+        switch(sessionStorage.getItem("navbar")){
+            case "home":
+                $(function(){
+                    $(".home").addClass('active');
+                });
+                break;
+            case 'activity':
+                $(function(){
+                    $(".activity").addClass('active');
+                });
+                break;
+            case 'search':
+                $(function(){
+                    $(".search").addClass('active');
+                });
+                break;
+            case 'profile':
+                $(function(){
+                    $(".profile").addClass('active');
+                });
+                break;
+        }
+
+    </script>
+{% endblock %}
+
+
+{% block body_1 %}
+
+    <div class="navbar">
+        <a href="" class="col-3 nav-font home">Home</a>
+        <a href="../activity/activity_main.html" class="col-3 nav-font activity">Activity</a>
+        <a href="../search/search_main.html" class="col-3 nav-font search">Search</a>
+        <a href="../profile/profile_main.html" class="col-3 nav-font profile">Profile</a>
+    </div>
+{% endblock %}

@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block body_1 %}
-    <h1>{% trans "ようこそ。STUDYWISEへ" %}</h1>
+    <h1>{% trans "Welcome to STUDYWISE" %}</h1>
 
     <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
